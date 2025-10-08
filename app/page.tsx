@@ -135,7 +135,7 @@ function VideoSlider() {
       subtitle: "Diesel Generators & Systems",
       description: "Reliable power solutions and automation systems for industrial applications",
       background: "bg-gradient-to-br from-[#1e3a8a] to-[#3b82f6]",
-      videoUrl: "/h1.mp4"
+      videoUrl: "/h2.mp4"
     },
     {
       id: 3,
@@ -143,7 +143,7 @@ function VideoSlider() {
       subtitle: "Protective Equipment",
       description: "Complete range of personal protective equipment and safety solutions",
       background: "bg-gradient-to-br from-[#059669] to-[#10b981]",
-      videoUrl: "/h1.mp4"
+      videoUrl: "/h3.mp4"
     }
   ];
 

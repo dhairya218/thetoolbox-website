@@ -9,4 +9,3 @@ services:
       - key: NODE_ENV
         value: production
     healthCheckPath: /
-    dockerfilePath: ./Dockerfile

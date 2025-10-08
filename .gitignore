@@ -42,9 +42,12 @@ coverage/
 tmp/
 temp/
 
-# Video files (too large for GitHub)
-*.mp4
+# Video files (too large for GitHub) - but allow specific ones
 *.mov
 *.avi
 *.mkv
 *.webm
+# Allow specific videos for slider
+!public/h1.mp4
+!public/h2.mp4
+!public/h3.mp4
