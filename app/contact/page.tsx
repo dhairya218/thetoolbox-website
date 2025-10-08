@@ -266,41 +266,105 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-primary to-primary/90 text-white">
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
+            className="text-center mb-12"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Work Together?
+            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
+              Our Locations Map
             </h2>
-            <p className="text-xl mb-8 text-white/90">
-              Whether you need a quote, technical support, or have questions about our products, our expert team is here to help.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Find us across three strategic locations in the Democratic Republic of Congo
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="tel:+243904060858">
-                <Button
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90 text-primary font-semibold text-lg px-8 py-6"
-                >
-                  <Phone className="h-5 w-5 mr-2" />
-                  Call Now
-                </Button>
-              </a>
-              <a href="mailto:info@thetoolboxsas.com">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-semibold text-lg px-8 py-6"
-                >
-                  <Mail className="h-5 w-5 mr-2" />
-                  Email Us
-                </Button>
-              </a>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {locations.map((location, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <Card className="h-full hover:shadow-xl transition-all duration-300 border-2 hover:border-primary">
+                  <CardContent className="p-8">
+                    <div className="mb-6">
+                      <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center mx-auto mb-4">
+                        <MapPin className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-primary mb-2">
+                        {location.city}
+                      </h3>
+                      <p className="text-muted-foreground">
+                        {location.address}
+                      </p>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-center space-x-2">
+                        <Phone className="h-4 w-4 text-accent" />
+                        <span className="text-sm text-muted-foreground">
+                          {location.phones[0]}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-center space-x-2">
+                        <Mail className="h-4 w-4 text-accent" />
+                        <span className="text-sm text-muted-foreground">
+                          {location.email}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
+                      <Button 
+                        className="w-full bg-primary hover:bg-accent hover:text-primary"
+                        onClick={() => {
+                          // You can add Google Maps integration here
+                          const query = encodeURIComponent(location.address);
+                          window.open(`https://www.google.com/maps/search/?api=1&query=${query}`, '_blank');
+                        }}
+                      >
+                        View on Map
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-12 text-center"
+          >
+            <div className="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-primary mb-4">
+                Interactive Map
+              </h3>
+              <p className="text-muted-foreground mb-6">
+                Click on any location above to view it on Google Maps, or use the embedded map below.
+              </p>
+              <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <MapPin className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <p className="text-muted-foreground">
+                    Interactive map will be displayed here
+                  </p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    (Google Maps integration can be added)
+                  </p>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>

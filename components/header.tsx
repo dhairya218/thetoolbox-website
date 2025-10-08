@@ -36,7 +36,7 @@ export function Header() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
               {/* Left logo */}
-              <Link href="/" className="flex items-center">
+              <Link href="/" className="flex items-center space-x-4">
                 <Image 
                   src="/logo.png" 
                   alt="The Tool Box Logo" 
@@ -44,6 +44,14 @@ export function Header() {
                   height={144}
                   className="h-16 w-auto"
                 />
+                <div className="flex flex-col">
+                  <h1 className="text-lg font-bold text-primary leading-tight">
+                    The Tool Boxsas
+                  </h1>
+                  <p className="text-xs text-white/80 font-medium">
+                    Industrial Solutions
+                  </p>
+                </div>
               </Link>
 
           {/* Right nav and actions */}
@@ -91,6 +99,10 @@ export function Header() {
             className="md:hidden border-t border-white/10 bg-black/80 backdrop-blur"
           >
             <nav className="container mx-auto px-4 py-4 flex flex-col space-y-4 text-white/90">
+              <div className="mb-4 pb-4 border-b border-white/20">
+                <h2 className="text-lg font-bold text-white">The Tool Boxsas</h2>
+                <p className="text-xs text-white/70">Industrial Solutions</p>
+              </div>
               {navLinks.map((item) => (
                 <Link key={item.href} href={item.href} onClick={() => setIsMobileMenuOpen(false)} className="text-sm">
                   {item.label}

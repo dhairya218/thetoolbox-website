@@ -57,11 +57,19 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 text-accent">Locations</h3>
+            <h3 className="text-lg font-semibold mb-4 text-accent">Our Locations</h3>
             <ul className="space-y-3 text-sm text-white/80">
               <li className="flex items-start space-x-2">
                 <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-accent" />
-                <span>Lubumbashi, Likasi, Kolwezi - D.R. Congo</span>
+                <span>Lubumbashi, D.R. Congo</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-accent" />
+                <span>Likasi, D.R. Congo</span>
+              </li>
+              <li className="flex items-start space-x-2">
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-accent" />
+                <span>Kolwezi, D.R. Congo</span>
               </li>
             </ul>
           </div>

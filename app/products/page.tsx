@@ -44,43 +44,62 @@ export default function Products() {
         </motion.div>
       </section>
 
-      <section className="py-12 bg-white border-b sticky top-20 z-40">
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-100">
         <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-wrap justify-center gap-3"
-          >
-            {categories.map((category) => (
-              <Button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                variant={selectedCategory === category ? 'default' : 'outline'}
-                className={
-                  selectedCategory === category
-                    ? 'bg-primary hover:bg-primary/90'
-                    : 'hover:bg-accent hover:text-primary'
-                }
-              >
-                {category}
-              </Button>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      <section className="py-20 bg-secondary/30">
-        <div className="container mx-auto px-4">
-          <AnimatePresence mode="wait">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Sidebar - Categories */}
             <motion.div
-              key={selectedCategory}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="w-full lg:w-80 flex-shrink-0"
             >
+              <div className="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                <h3 className="text-xl font-bold text-primary mb-6">Categories</h3>
+                <div className="space-y-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-200 ${
+                        selectedCategory === category
+                          ? 'bg-primary text-white shadow-md'
+                          : 'text-gray-700 hover:bg-primary/10 hover:text-primary'
+                      }`}
+                    >
+                      <span className="font-medium">{category}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Right Content - Products */}
+            <div className="flex-1">
+              {/* Products Header */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                className="mb-8"
+              >
+                <h2 className="text-3xl font-bold text-primary mb-2">
+                  {selectedCategory}
+                </h2>
+                <p className="text-gray-600">
+                  {filteredProducts.length} product{filteredProducts.length !== 1 ? 's' : ''} found
+                </p>
+              </motion.div>
+
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={selectedCategory}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.4 }}
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+                >
               {filteredProducts.map((product, index) => {
                 const Icon = product.icon;
                 return (
@@ -89,53 +108,61 @@ export default function Products() {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className="group"
                   >
-                    <Card className="group h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-accent">
-                      <div className="relative h-64 overflow-hidden">
+                    <Card className="h-full overflow-hidden hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary bg-white">
+                      <div className="relative h-80 overflow-hidden">
                         <div
                           className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
                           style={{ backgroundImage: `url(${product.image})` }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/20 to-transparent" />
+                        
+                        {/* Product Name Overlay */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6">
+                          <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-lg">
+                            {product.title}
+                          </h3>
+                          <p className="text-white/90 text-sm leading-relaxed">
+                            {product.description}
+                          </p>
+                        </div>
+
+                        {/* Category Badge */}
                         <div className="absolute top-4 right-4">
-                          <Badge className="bg-accent text-primary font-semibold">
+                          <Badge className="bg-accent text-primary font-semibold px-3 py-1">
                             {product.category}
                           </Badge>
                         </div>
-                        <div className="absolute bottom-4 left-4">
-                          <div className="bg-accent p-3 rounded-lg shadow-lg">
-                            <Icon className="h-7 w-7 text-primary" />
+
+                        {/* Icon */}
+                        <div className="absolute top-4 left-4">
+                          <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-lg">
+                            <Icon className="h-6 w-6 text-primary" />
                           </div>
                         </div>
                       </div>
 
                       <CardContent className="p-6">
-                        <h3 className="text-2xl font-bold text-primary mb-3 group-hover:text-accent transition-colors">
-                          {product.title}
-                        </h3>
-                        <p className="text-muted-foreground mb-4 leading-relaxed">
-                          {product.description}
-                        </p>
-
-                        <div className="mb-6">
-                          <h4 className="text-sm font-semibold text-primary mb-2">
+                        <div className="mb-4">
+                          <h4 className="text-sm font-semibold text-primary mb-3">
                             Key Features:
                           </h4>
-                          <ul className="grid grid-cols-2 gap-2">
+                          <div className="grid grid-cols-1 gap-2">
                             {product.features.map((feature, idx) => (
-                              <li
+                              <div
                                 key={idx}
-                                className="text-xs text-muted-foreground flex items-center"
+                                className="text-sm text-muted-foreground flex items-center"
                               >
-                                <span className="w-1.5 h-1.5 bg-accent rounded-full mr-2" />
+                                <span className="w-2 h-2 bg-primary rounded-full mr-3 flex-shrink-0" />
                                 {feature}
-                              </li>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         </div>
 
                         <Link href="/contact">
-                          <Button className="w-full bg-primary hover:bg-accent hover:text-primary transition-colors font-semibold">
+                          <Button className="w-full bg-primary hover:bg-accent hover:text-primary transition-colors font-semibold py-3">
                             Enquire Now
                           </Button>
                         </Link>
@@ -143,50 +170,26 @@ export default function Products() {
                     </Card>
                   </motion.div>
                 );
-              })}
-            </motion.div>
-          </AnimatePresence>
+                  })}
+                </motion.div>
+              </AnimatePresence>
 
-          {filteredProducts.length === 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="text-center py-20"
-            >
-              <p className="text-xl text-muted-foreground">
-                No products found in this category.
-              </p>
-            </motion.div>
-          )}
+              {filteredProducts.length === 0 && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="text-center py-20"
+                >
+                  <p className="text-xl text-muted-foreground">
+                    No products found in this category.
+                  </p>
+                </motion.div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-primary to-primary/90 text-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Need Help Choosing?
-            </h2>
-            <p className="text-xl mb-8 text-white/90">
-              Our expert team is ready to help you find the perfect industrial solution for your specific needs.
-            </p>
-            <Link href="/contact">
-              <Button
-                size="lg"
-                className="bg-accent hover:bg-accent/90 text-primary font-semibold text-lg px-8 py-6"
-              >
-                Contact Our Experts
-              </Button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
     </div>
   );
 }
