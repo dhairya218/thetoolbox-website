@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Wrench, MapPin, Phone, Mail } from 'lucide-react';
+import Image from 'next/image';
+import { MapPin, Phone, Mail } from 'lucide-react';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -10,9 +11,15 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <div className="bg-accent p-2 rounded-lg">
-                <Wrench className="h-6 w-6 text-primary" />
-              </div>
+              <Link href="/" className="flex items-center">
+                <Image 
+                  src="/logo.png" 
+                  alt="The Tool Box Logo" 
+                  width={120} 
+                  height={72}
+                  className="h-10 w-auto"
+                />
+              </Link>
               <div>
                 <h2 className="text-xl font-bold">The Tool Boxsas</h2>
                 <p className="text-xs text-accent">Industrial Solutions</p>
